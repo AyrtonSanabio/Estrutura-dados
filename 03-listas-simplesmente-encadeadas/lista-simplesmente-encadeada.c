@@ -81,25 +81,153 @@ int inserir_fim(Lista *lista, int valor){
    
 }
 
+int inserir_posicao(Lista  *lista, int posicao, int valor){
+
+    // Não aceita posição negativa ou depois do fim
+    if(posicao > lista->quantidade || posicao < 0){
+        return 0;
+    }
+
+    // Posição 0 é um caso especial: não existe nó anterior.
+    if (posicao == 0) {
+        return inserir_inicio(lista, valor);
+    }
+
+
+    No *novo_no = malloc(sizeof(No));
+
+    if(novo_no == NULL){
+        return 0;
+    }
+
+    novo_no->valor = valor;
+
+    // Encontra o nó imediatamente anterior à posição desejada.
+    No *anterior = lista->inicio;
+
+    for(int i=0; i<posicao; i++){
+        anterior = anterior->proximo;
+    }
+
+    // Primeiro o novo nó aponta para o nó que vinha depois
+    novo_no->proximo = anterior->proximo;
+
+    // Depois, o nó anterior passa a apontar para o novo nó
+    anterior->proximo = novo_no;
+
+    lista->quantidade++;
+
+    return 1;
+}
+
+void imprimir_lista(Lista *lista){
+    No *no_aux = malloc(sizeof(No));
+
+    while(no_aux->proximo != NULL){
+        printf("\n%d", no_aux->valor);
+    }
+}
+
+void limpar_lista(Lista *lista){
+
+    No *no_removido = lista->inicio;
+
+    while(lista->inicio != NULL){
+
+        no_removido->proximo = lista->inicio;
+        lista->inicio = no_removido->proximo;
+
+        free(no_removido);
+
+    }
+    
+}
+
+int contem_valor(Lista *lista, int valor){
+    No *no_aux = malloc(sizeof(No));
+
+    while(no_aux != NULL){
+        if(no_aux->valor == valor){
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+int contar_ocorrencias(Lista *lista, int valor){
+    No *no_aux = malloc(sizeof(No));
+    int cont = 0;
+    while(no_aux->proximo != NULL){
+        if(no_aux->valor == valor){
+            cont ++;
+        }
+    }
+    return cont;
+}
+
+int remover_inicio(Lista *lista){
+
+    // Não há nó para remover
+    if (lista->quantidade == 0){
+        return 0;
+    }
+
+    // Guarda o endereço do primeiro nó.
+    No *no_removido = lista->inicio;
+
+    // O segundo nó passa a ser o primeiro
+    lista->inicio = no_removido->proximo;
+
+    // Libera o nó que deixou a lista
+    free(no_removido);
+
+    lista->quantidade --;
+
+    return 1;
+}
+
+int buscar_posicao(Lista *lista, int posicao, int *resultado){
+    
+    // A posição precisa existir na lista.
+    if (posicao < 0 || posicao >= lista->quantidade) {
+        return 0;
+    }
+
+    // Começa no primeiro índice
+    No *no_atual = lista->inicio;   
+
+    int contador = 0;
+
+    // Avança até chegar à posição pedida.
+    for (int i = 0; i < posicao; i++) {
+        no_atual = no_atual->proximo;
+    }
+
+    // Guarda o valor encontrado na variável enviada pela pessoa.
+    *resultado = no_atual->valor;
+
+    return 1;
+}
+
+
+
 /*
 
-int inserir_inicio(Lista *lista, int valor);
-int inserir_fim(Lista *lista, int valor);
-void imprimir_lista(Lista *lista);
-void limpar_lista(Lista *lista);
-int contem_valor(Lista *lista, int valor);
-int buscar_posicao(Lista *lista, int valor);
-int contar_ocorrencias(Lista *lista, int valor);
-int inserir_posicao(Lista *lista, int posicao, int valor);
+
+
 int remover_inicio(Lista *lista);
 int remover_fim(Lista *lista);
 int remover_valor(Lista *lista, int valor);
 int remover_posicao(Lista *lista, int posicao);
+
 int consultar_primeiro(Lista *lista, int *resultado);
 int consultar_ultimo(Lista *lista, int *resultado);
+
 int maior_valor(Lista *lista, int *resultado);
 int menor_valor(Lista *lista, int *resultado);
-int somar_elementos(Lista *lista);
+
+
 void inverter_lista(Lista *lista);
 int inserir_ordenado(Lista *lista, int valor);
 int lista_esta_ordenada(Lista *lista);
