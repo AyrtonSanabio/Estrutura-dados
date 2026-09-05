@@ -1,5 +1,12 @@
+/*
+Nome:
+Matricula:
+Data:
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
+#include "lista.h"
 
 typedef struct No {
     int valor; 
@@ -7,11 +14,11 @@ typedef struct No {
     struct No *proximo;
 }No;
 
-typedef struct{
+struct Lista {
     No *inicio;
     No *fim;
     int quantidade;
-}Lista;
+};
 
 void inicializar(Lista *lista){
     lista->inicio = NULL;
@@ -83,20 +90,18 @@ int inserir_fim(Lista *lista, int valor){
     
 }
 /*
+Operacoes solicitadas pelo trabalho que ainda precisam ser implementadas:
 
-int esta_vazia(Lista *lista);
+Lista *Lcria(void);
+void Ldestroi(Lista *lista);
+int Lvazia(Lista *lista);
+int Lcheia(Lista *lista);
+int Ltamanho(Lista *lista);
+int Lexamina(Lista *lista, int posicao);
+int Llocaliza(Lista *lista, int elemento);
+void Linsere(Lista *lista, int elemento, int posicao);
+int Lremove(Lista *lista, int posicao);
 
-int inserir_posicao(Lista *lista, int posicao, int valor);
-
-int remover_inicio(Lista *lista);
-int remover_fim(Lista *lista);
-int remover_posicao(Lista *lista, int posicao);
-
-int obter_valor_posicao(Lista *lista, int posicao, int *resultado);
-int buscar_posicao(Lista *lista, int valor);
-
-void imprimir_inicio_fim(Lista *lista);
-void imprimir_fim_inicio(Lista *lista);
-void limpar_lista(Lista *lista);
-
+As funcoes inserir_inicio e inserir_fim acima ja podem ser reaproveitadas
+durante a implementacao de Linsere.
 */

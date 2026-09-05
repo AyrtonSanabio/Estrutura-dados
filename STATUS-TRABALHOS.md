@@ -4,7 +4,7 @@
 
 O PDF exige bibliotecas `.c` e `.h` para pilha, fila e lista, além de um programa principal demonstrativo. A lista deve ser dinâmica e duplamente encadeada, com início, fim e tamanho, conforme a figura da página 5.
 
-### Pilha — `06-pilhas/pilha.c`
+### Pilha — `01-pilhas/pilha.c`
 
 | Operação do PDF | Estado atual |
 | --- | --- |
@@ -19,7 +19,7 @@ O PDF exige bibliotecas `.c` e `.h` para pilha, fila e lista, além de um progra
 
 Também existem impressão, contagem de ocorrências, busca de valor, maior e menor valor. Soma, média e igualdade aparecem apenas como declarações comentadas e não são exigidas no PDF.
 
-### Lista duplamente encadeada — `04-listas-duplamente-encadeadas/lista-duplamente-encadeada.c`
+### Lista duplamente encadeada — `03-listas/lista.c`
 
 Já implementado: estrutura com início, fim e quantidade; inicialização; inserção no início e no fim. O tipo dos ponteiros dos nós foi corrigido.
 
@@ -27,7 +27,7 @@ Faltam as operações da interface: `Lcria`, `Ldestroi`, `Lvazia`, `Lcheia`, `Lt
 
 As inserções nas extremidades podem ser reaproveitadas em `Linsere`, mas ainda não equivalem à inserção em qualquer posição exigida. A inicialização também não equivale à criação e retorno da lista. Por isso essas funções mantiveram seus nomes. Declarações dentro de comentários não são implementações.
 
-### Fila — `07-filas`
+### Fila — `02-filas`
 
 Sem implementação. Faltam `Fcria`, `Fdestroi`, `Fvazia`, `Fcheia`, `Ftamanho`, `Fexamina`, `Finsere` e `Fremove`.
 
@@ -66,7 +66,7 @@ Esta representação estática não atende ao modelo de lista pedido.
 
 ## TP — TAD Grafo estático (30/09/2026)
 
-A pasta `14-grafos` ainda não tem implementação. Faltam:
+A pasta `04-grafos` ainda não tem implementação. Faltam:
 
 - `grafo.h` e `grafo.c`, com `typedef struct grafo *Grafo` e capacidade máxima prevista para vértices e arestas.
 - As 31 operações abaixo, com os nomes e contratos do PDF.
