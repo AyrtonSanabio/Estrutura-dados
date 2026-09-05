@@ -1,33 +1,60 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "pilha.h"
 
+#define COR_RESET    "\033[0m"
+#define COR_VERMELHA "\033[31m"
+#define COR_VERDE    "\033[32m"
+#define COR_AMARELA  "\033[33m"
+#define COR_AZUL     "\033[34m"
+#define COR_CIANO    "\033[36m"
+#define COR_BRANCA   "\033[97m"
 
 typedef struct No {
     int valor;
     struct No *abaixo;
 } No;
 
-typedef struct {
+struct Pilha {
     No *topo;
     int quantidade;
-} Pilha;
+};
 
 
-void inicializar_pilha(Pilha *pilha){
+Pilha *Pcria(void){
+    Pilha *pilha = malloc(sizeof(Pilha));
+
+    if(pilha == NULL){
+        return NULL;
+    }
+
     pilha->topo = NULL;
     pilha->quantidade = 0;
 
+    return pilha;
+
 }
 
-int esta_vazia(Pilha *pilha) {
+int Pvazia(Pilha *pilha) {
     return pilha->topo == NULL;
 }
 
-int empilhar(Pilha *pilha, int valor){
+int Pcheia(Pilha *pilha){
+    (void) pilha;
+    No *novo_no = malloc(sizeof(No));
+    if(novo_no == NULL){
+        return 1;
+    }
+
+    free(novo_no);
+    return 0;
+}
+
+void Pinsere(Pilha *pilha, int valor){
     No *novo_no = malloc(sizeof(No)); // Aloca memória para criar um novo nó
 
     if(novo_no == NULL){
-        return 0; // Não foi possível alocar memória
+        return; // Não foi possível alocar memória
     }
 
     novo_no->valor = valor; // Guarda o valor recebido dentro do novo_no
@@ -40,13 +67,11 @@ int empilhar(Pilha *pilha, int valor){
     pilha->topo = novo_no;
     pilha->quantidade++;
 
-    return 1;
-
 }
 
-int desempilhar(Pilha *pilha){
+int Premove(Pilha *pilha){
 
-    if (esta_vazia(pilha)) {
+    if (Pvazia(pilha)) {
         return 0;
     }
 
@@ -54,50 +79,74 @@ int desempilhar(Pilha *pilha){
     // Esse será o nó removido da pilha.
     No *no_removido = pilha->topo;
 
+
+    int valor_removido = no_removido->valor;
+
     // O campo "abaixo" do nó removido contém o endereço
     // do nó que estava logo abaixo dele.
     // Esse nó passa a ser o novo topo da pilha.
-    pilha->topo = no_removido->abaixo;
 
-    free(no_removido);
+    pilha->topo = no_removido->abaixo;
     pilha->quantidade--;
 
-    return  1;
+    free(no_removido);
+
+    return  valor_removido;
 }
 
-int consultar_topo(Pilha *pilha, int *valor_topo){
+int Pexamina(Pilha *pilha){
 
-    if (esta_vazia(pilha)) {
+    if (Pvazia(pilha)) {
         return 0;
     }
 
-    *valor_topo = pilha->topo->valor;
-
-    return 1;
+    return pilha->topo->valor;
 }
 
-int quantidade_elementos(Pilha *pilha){
+int Ptamanho(Pilha *pilha){
     return pilha->quantidade;
     
 }
 
-void limpar_pilha(Pilha *pilha){
-    while (pilha != esta_vazia(pilha))
-    {
-        desempilhar(pilha);
+void Pdestroi(Pilha *pilha){
+
+    if (pilha == NULL) {
+        return;
     }
+
+    while (!Pvazia(pilha))
+    {
+        Premove(pilha);
+    }
+
+    free(pilha);
 
 }
 
 void imprimir_pilha(Pilha *pilha){
     No *atual = pilha->topo;
 
+    printf(COR_CIANO "\n================================\n");
+    printf("           PILHA ATUAL          \n");
+    printf("================================\n" COR_RESET);
+
+    if (Pvazia(pilha)) {
+        printf(COR_AMARELA "          [ pilha vazia ]\n" COR_RESET);
+    }
+
     while(atual != NULL){
-        printf("\n%d", atual->valor);
+        if (atual == pilha->topo) {
+            printf(COR_VERDE " topo -> " COR_BRANCA "| %10d |\n" COR_RESET,
+                   atual->valor);
+        } else {
+            printf(COR_BRANCA "         | %10d |\n" COR_RESET, atual->valor);
+        }
+        printf(COR_AZUL "         +------------+\n" COR_RESET);
         atual = atual->abaixo;
     }
 
-    printf("\n");
+    printf(COR_CIANO "Quantidade de elementos: " COR_BRANCA "%d\n", Ptamanho(pilha));
+    printf(COR_CIANO "================================\n" COR_RESET);
 }
 
 int contar_ocorrencias(Pilha *pilha, int valor){
@@ -128,7 +177,7 @@ int contem_valor(Pilha *pilha, int valor){
 int maior_valor(Pilha *pilha, int *resultado){
 
 
-    if (esta_vazia(pilha)) {
+    if (Pvazia(pilha)) {
         return 0;
     }
 
@@ -148,7 +197,7 @@ int maior_valor(Pilha *pilha, int *resultado){
 
 int menor_valor(Pilha *pilha, int *resultado){
 
-    if (esta_vazia(pilha)) {
+    if (Pvazia(pilha)) {
         return 0;
     }
 
@@ -166,13 +215,76 @@ int menor_valor(Pilha *pilha, int *resultado){
     return 1;
 }
 
-/*
-int somar_elementos(Pilha *pilha);
-float calcular_media(Pilha *pilha);
-int sao_iguais(Pilha *pilha1, Pilha *pilha2);
-*/
 
+int main(void){
+    Pilha *pilha = Pcria();
+    int opcao = -1;
+    int valor;
 
-int main(){
+    if (pilha == NULL) {
+        printf(COR_VERMELHA "Nao foi possivel criar a pilha.\n" COR_RESET);
+        return 1;
+    }
+
+    do {
+        imprimir_pilha(pilha);
+        printf(COR_AZUL "\n1" COR_RESET " - Inserir elemento\n");
+        printf(COR_AZUL "2" COR_RESET " - Remover elemento\n");
+        printf(COR_AZUL "3" COR_RESET " - Examinar o topo\n");
+        printf(COR_AZUL "4" COR_RESET " - Verificar se esta vazia\n");
+        printf(COR_AZUL "5" COR_RESET " - Verificar se esta cheia\n");
+        printf(COR_AZUL "6" COR_RESET " - Consultar o tamanho\n");
+        printf(COR_VERMELHA "0" COR_RESET " - Sair\n");
+        printf(COR_AMARELA "Escolha uma opcao: " COR_RESET);
+
+        if (scanf("%d", &opcao) != 1) {
+            printf(COR_VERMELHA "\nEntrada invalida. Encerrando o programa.\n" COR_RESET);
+            opcao = 0;
+            continue;
+        }
+
+        switch (opcao) {
+            case 1:
+                printf("Digite o valor: ");
+                if (scanf("%d", &valor) == 1) {
+                    Pinsere(pilha, valor);
+                    printf(COR_VERDE "Elemento inserido.\n" COR_RESET);
+                } else {
+                    printf(COR_VERMELHA "Valor invalido. Encerrando o programa.\n" COR_RESET);
+                    opcao = 0;
+                }
+                break;
+            case 2:
+                if (Pvazia(pilha)) {
+                    printf(COR_AMARELA "A pilha esta vazia.\n" COR_RESET);
+                } else {
+                    printf(COR_VERDE "Elemento removido: %d\n" COR_RESET, Premove(pilha));
+                }
+                break;
+            case 3:
+                if (Pvazia(pilha)) {
+                    printf(COR_AMARELA "A pilha esta vazia.\n" COR_RESET);
+                } else {
+                    printf(COR_VERDE "Elemento no topo: %d\n" COR_RESET, Pexamina(pilha));
+                }
+                break;
+            case 4:
+                printf(Pvazia(pilha) ? "A pilha esta vazia.\n" : "A pilha nao esta vazia.\n");
+                break;
+            case 5:
+                printf(Pcheia(pilha) ? "A pilha esta cheia.\n" : "A pilha nao esta cheia.\n");
+                break;
+            case 6:
+                printf("Tamanho da pilha: %d\n", Ptamanho(pilha));
+                break;
+            case 0:
+                printf(COR_CIANO "Encerrando o programa.\n" COR_RESET);
+                break;
+            default:
+                printf(COR_VERMELHA "Opcao invalida.\n" COR_RESET);
+        }
+    } while (opcao != 0);
+
+    Pdestroi(pilha);
     return 0;
 }
