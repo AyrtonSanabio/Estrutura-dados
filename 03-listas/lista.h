@@ -18,5 +18,6 @@ int Lexamina(Lista *lista, int posicao);
 int Llocaliza(Lista *lista, int elemento);
 void Linsere(Lista *lista, int elemento, int posicao);
 int Lremove(Lista *lista, int posicao);
+void imprimir_lista(Lista *lista);
 
 #endif
