@@ -1,16 +1,14 @@
 /*
-Nome:
-Matricula:
-Data:
+Nome: Ayrton Sanabio
+Matricula: 0117925
 */
 
 #include "caminho.h"
 
-/*
-Implemente Gcaminho usando a TAD de grafo, sem acessar a estrutura interna.
-
-O procedimento deve imprimir o caminho entre partida e chegada. Se nao houver
-caminho, deve imprimir apenas o vertice de partida. Como os pesos representam
-distancias, documente no relatorio a suposicao de pesos nao negativos caso use
-o algoritmo de Dijkstra.
-*/
+void Gcaminho(Grafo grafo, float *pesos, int partida, int chegada) {
+    (void) grafo;
+    (void) pesos;
+    (void) partida;
+    (void) chegada;
+    /* TODO: implementar e imprimir o caminho de menor custo. */
+}
