@@ -16,8 +16,8 @@ typedef struct arvore *Arvore;
 /* TODO: alocar e retornar uma arvore inicialmente vazia. */
 Arvore Acria(void);
 
-/* TODO: liberar todos os nos e, ao final, a estrutura da arvore. */
-void Adestroi(Arvore arvore).;
+/* TODO: liberar todos os nos e, ao final, a estrutura da arvore.. */
+void Adestroi(Arvore arvore);
 
 /* TODO: retornar 1 se a arvore nao possuir nos; 0 caso contrario. */
 int Avazia(Arvore arvore);
