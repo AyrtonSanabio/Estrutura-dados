@@ -1,7 +1,6 @@
 /*
-Nome:
-Matricula:
-Data:
+Nome: Ayrton Sanabio
+Matricula: 0117925
 */
 
 #include "caminho.h"
