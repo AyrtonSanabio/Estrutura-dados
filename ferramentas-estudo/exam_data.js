@@ -1,5 +1,5 @@
 const ExamData=(()=>{
-  // Cada questão corresponde a um item explícito do programa da prova.
+  // Cada item do programa tem uma questão inicial e duas de dificuldade crescente.
   const Q=(name,lesson,prompt,choices,answer,why)=>({name,lesson,prompt,choices,answer,why});
   const modules=[
     {id:'analise',title:'Análise de algoritmos',visual:'analysis',trace:'nested',intro:'Conte operações em função do tamanho da entrada. Separe o problema da instância concreta e justifique a resposta.',questions:[
@@ -67,6 +67,11 @@ const ExamData=(()=>{
       Q('Carregar e salvar arquivo-texto','Um formato precisa declarar vértices e arestas, direção e peso quando existirem. O carregador valida referências e rejeita entrada malformada.','Ao ler uma aresta apontando para ID inexistente, o carregador deve:',['Validar e reportar erro','Inventar vértice silenciosamente sempre','Ignorar o arquivo inteiro sem mensagem'],0,'Referências inválidas devem produzir erro claro conforme o contrato.')
     ]}
   ];
-  function score(answers,studied,mod){const done=mod.questions.filter((_,i)=>Number.isInteger(answers?.[i])).length;const correct=mod.questions.filter((q,i)=>answers?.[i]===q.answer).length;const seen=mod.questions.filter((_,i)=>studied?.[i]===true).length;const total=mod.questions.length;return {done,correct,seen,total,percent:Math.round(100*correct/total),ready:done===total&&seen===total&&correct/total>=.8}};
-  return {modules,score};
+  function allQuestions(mod){
+    const basic=mod.questions.map((q,i)=>({...q,level:'Básico',topicIndex:i}));
+    const extra=ExamExtra.byModule[mod.id].flatMap((pair,i)=>pair.map(q=>({...q,name:mod.questions[i].name,topicIndex:i})));
+    return basic.concat(extra);
+  }
+  function score(answers,studied,mod){const questions=allQuestions(mod),done=questions.filter((_,i)=>Number.isInteger(answers?.[i])).length;const correct=questions.filter((q,i)=>answers?.[i]===q.answer).length;const seen=mod.questions.filter((_,i)=>studied?.[i]===true).length;const total=questions.length,topics=mod.questions.length;return {done,correct,seen,total,topics,percent:Math.round(100*correct/total),ready:done===total&&seen===topics&&correct/total>=.8}};
+  return {modules,allQuestions,score};
 })();

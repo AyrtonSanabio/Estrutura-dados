@@ -40,11 +40,13 @@ const StudyPages=(()=>{
     {title:'Biologia e saúde',nodes:'Proteínas, genes ou substâncias',edges:'Interação ou regulação',question:'Quais entidades podem influenciar um alvo?',algorithm:'Caminhos, centralidade, comunidades',example:null}
   ];
   const $=id=>document.getElementById(id);
-  const tabs=['prova','laboratorio','conceitos','galeria','codigo-publico','aplicacoes','algoritmos'];
+  const tabs=['prova','custo','laboratorio','conceitos','galeria','codigo-publico','aplicacoes','algoritmos'];
   function showTab(name,scroll=true){
     if(!tabs.includes(name))name='laboratorio';
     tabs.forEach(id=>$(id).hidden=id!==name);
     document.querySelectorAll('[data-tab]').forEach(link=>link.setAttribute('aria-current',link.dataset.tab===name?'page':'false'));
+    const active=document.querySelector(`[data-tab="${name}"]`),nav=active?.parentElement;
+    if(nav){const bounds=nav.getBoundingClientRect(),item=active.getBoundingClientRect();if(item.left<bounds.left)nav.scrollLeft+=item.left-bounds.left-8;else if(item.right>bounds.right)nav.scrollLeft+=item.right-bounds.right+8}
     if(scroll)window.scrollTo({top:0,behavior:'smooth'});
     if(name==='galeria')requestAnimationFrame(drawGallery);
   }
