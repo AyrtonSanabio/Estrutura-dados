@@ -238,6 +238,9 @@ class Handler(BaseHTTPRequestHandler):
                 dot,svg=render(data['graph'],selected_vertices=data.get('vertices',[]),selected_edges=data.get('edges',[])); result={'dot':dot,'svg':svg}
             elif self.path=='/api/verify':
                 ok,message=verify(data['graph'],data['answer']); result={'ok':ok,'message':message}
+            elif self.path=='/api/c-cost':
+                from c_cost import translate
+                result=translate(data['source'], data.get('function'))
             else: self.send_error(404); return
             status=200
         except (ValueError,KeyError,TypeError,subprocess.TimeoutExpired,OSError) as exc:
