@@ -212,6 +212,8 @@ class Handler(BaseHTTPRequestHandler):
                  '/concept_visuals.js': HERE/'concept_visuals.js',
                  '/algorithm_engine.js': HERE/'algorithm_engine.js',
                  '/algorithms_ui.js': HERE/'algorithms_ui.js',
+                 '/exam_data.js': HERE/'exam_data.js',
+                 '/exam_prep.js': HERE/'exam_prep.js',
                  '/node_modules/@hpcc-js/wasm/dist/graphviz.js': HERE/'node_modules'/'@hpcc-js'/'wasm'/'dist'/'graphviz.js',
                  '/examples/grafo.json': HERE/'exemplos'/'grafo.json',
                  '/examples/arvore.json': HERE/'exemplos'/'arvore.json',
