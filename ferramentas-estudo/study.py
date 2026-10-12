@@ -209,6 +209,7 @@ class Handler(BaseHTTPRequestHandler):
                  '/style.css': HERE/'style.css', '/app.js': HERE/'app.js',
                  '/fallback.js': HERE/'fallback.js',
                  '/learning.js': HERE/'learning.js',
+                 '/concept_visuals.js': HERE/'concept_visuals.js',
                  '/algorithm_engine.js': HERE/'algorithm_engine.js',
                  '/algorithms_ui.js': HERE/'algorithms_ui.js',
                  '/node_modules/@hpcc-js/wasm/dist/graphviz.js': HERE/'node_modules'/'@hpcc-js'/'wasm'/'dist'/'graphviz.js',

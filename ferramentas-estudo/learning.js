@@ -63,7 +63,11 @@ const StudyPages=(()=>{
     const label=document.createElement('strong');label.textContent='Exemplo concreto';
     const ex=document.createElement('p');ex.textContent=example;
     const use=document.createElement('p');use.innerHTML='<strong>Para que serve:</strong> ';use.append(document.createTextNode(application));
-    section.append(label,ex,use);detail.append(badge,h,intro,section);
+    const visual=ConceptVisuals.render(index);
+    const figure=document.createElement('figure');figure.className='concept-visual';
+    figure.innerHTML=visual.svg;
+    const caption=document.createElement('figcaption');caption.textContent=visual.caption;figure.append(caption);
+    section.append(label,ex,use);detail.append(badge,h,figure,intro,section);
     conceptList.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.index)===index)));
   }
   function renderConcepts(){
