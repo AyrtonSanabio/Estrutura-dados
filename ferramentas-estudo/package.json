@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "Graphviz WebAssembly para gerar SVG sem instalador global",
+  "dependencies": {
+    "@hpcc-js/wasm": "2.35.3"
+  }
+}

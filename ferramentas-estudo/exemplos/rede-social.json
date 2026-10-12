@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "kind": "graph",
+  "directed": false,
+  "vertices": [{"id":"Ana"},{"id":"Beto"},{"id":"Cris"},{"id":"Dani"},{"id":"Eva"},{"id":"Fábio"},{"id":"Gabi"},{"id":"Hugo"}],
+  "edges": [{"id":"amizade-1","from":"Ana","to":"Beto"},{"id":"amizade-2","from":"Ana","to":"Cris"},{"id":"amizade-3","from":"Beto","to":"Dani"},{"id":"amizade-4","from":"Cris","to":"Dani"},{"id":"amizade-5","from":"Dani","to":"Eva"},{"id":"amizade-6","from":"Eva","to":"Fábio"},{"id":"amizade-7","from":"Fábio","to":"Gabi"},{"id":"amizade-8","from":"Gabi","to":"Hugo"},{"id":"amizade-9","from":"Eva","to":"Hugo"}]
+}
