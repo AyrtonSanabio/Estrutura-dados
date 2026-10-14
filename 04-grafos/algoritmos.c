@@ -7,7 +7,7 @@ Matricula: 0117925
 
 void GArvoreGeradoraMinima(Grafo grafo) {
     (void) grafo;
-    /* TODO: definir a representacao dos pesos e implementar Prim ou Kruskal. */
+    /* TODO: definir a representacao dos pesos e implementar Prim ou Kruskal.. */
 }
 
 void GBuscaLargura(Grafo grafo, int partida) {
