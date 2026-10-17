@@ -7,7 +7,7 @@ Data:
 #ifndef GRAFO_H
 #define GRAFO_H
 
-/* O grafo e representado por um ponteiro para uma estrutura interna. */
+/* O grafo e representado por um ponteiro para uma estrutura interna.. */
 typedef struct grafo *Grafo;
 
 /* Operacoes de criacao e destruicao. */
