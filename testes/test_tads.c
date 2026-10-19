@@ -2,10 +2,63 @@
 #include <assert.h>
 #include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "../01-pilhas/pilha.h"
 #include "../02-filas/fila.h"
 #include "../03-listas/lista.h"
 #include "../04-grafos/grafo.h"
+
+/* Compara estrelas e graus com um modelo simples apos remocoes aleatorias. */
+static void testa_remocoes(void) {
+    srand(117925);
+    for (int rodada = 0; rodada < 12; ++rodada) {
+        int origens[101], destinos[101], vivos[101], vertices[13];
+        Grafo g = GGcriaGrafo(12, 100);
+        assert(g);
+        for (int v = 1; v <= 12; ++v) { vertices[v] = 1; assert(GVcriaVertice(g) == v); }
+        for (int a = 1; a <= 100; ++a) {
+            origens[a] = rand() % 12 + 1; destinos[a] = rand() % 12 + 1;
+            vivos[a] = 1; assert(GAcriaAresta(g, origens[a], destinos[a]) == a);
+        }
+        for (int passo = 0; passo < 45; ++passo) {
+            int nv = 0, na = 0;
+            if (rand() % 3 == 0) {
+                int v = rand() % 12 + 1;
+                assert(removeVertice(g, v) == vertices[v]);
+                vertices[v] = 0;
+                for (int a = 1; a <= 100; ++a)
+                    if (origens[a] == v || destinos[a] == v) vivos[a] = 0;
+            } else {
+                int a = rand() % 100 + 1;
+                assert(removeAresta(g, a) == vivos[a]); vivos[a] = 0;
+            }
+            for (int a = 1; a <= 100; ++a) {
+                na += vivos[a]; assert(GBexisteIdAresta(g, a) == vivos[a]);
+            }
+            for (int v = 1; v <= 12; ++v) {
+                int grau = 0, entrada = GAprimaEntrada(g, v);
+                int saida = GAprimaSaida(g, v), incidente = GAprimaAresta(g, v);
+                nv += vertices[v];
+                assert(GBexisteIdVertice(g, v) == vertices[v]);
+                for (int a = 1; a <= 100; ++a) {
+                    if (!vivos[a]) continue;
+                    if (origens[a] == v) {
+                        ++grau; assert(saida == a); saida = GAproxSaida(g, v, saida);
+                    }
+                    if (destinos[a] == v) {
+                        ++grau; assert(entrada == a); entrada = GAproxEntrada(g, v, entrada);
+                    }
+                    if (origens[a] == v || destinos[a] == v) {
+                        assert(incidente == a); incidente = GAproxAresta(g, v, incidente);
+                    }
+                }
+                assert(!entrada && !saida && !incidente && GIpegaGrau(g, v) == grau);
+            }
+            assert(GInumeroVertices(g) == nv && GInumeroArestas(g) == na);
+        }
+        GGdestroiGrafo(g);
+    }
+}
 
 int main(void) {
     Pilha *p = Pcria();
@@ -79,6 +132,7 @@ int main(void) {
     fputs("2 1\n1 3\n", arquivo); fclose(arquivo);
     assert(!GGcarregaGrafo("output/testes/invalido.txt"));
     assert(!GGcarregaGrafo("output/testes/ausente.txt"));
-    puts("TADs basicas e 31 operacoes do grafo: OK");
+    testa_remocoes();
+    puts("TADs basicas e 31 operacoes do grafo: OK (inclui 540 estados de remocao)");
     return 0;
 }
