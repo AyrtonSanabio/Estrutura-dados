@@ -1,7 +1,0 @@
-{
-  "version": 1,
-  "kind": "graph",
-  "directed": true,
-  "vertices": [{"id":"Depósito"},{"id":"Centro"},{"id":"Norte"},{"id":"Sul"},{"id":"Leste"},{"id":"Cliente A"},{"id":"Cliente B"}],
-  "edges": [{"id":"r1","from":"Depósito","to":"Centro","weight":4},{"id":"r2","from":"Centro","to":"Norte","weight":7},{"id":"r3","from":"Centro","to":"Sul","weight":5},{"id":"r4","from":"Centro","to":"Leste","weight":6},{"id":"r5","from":"Norte","to":"Cliente A","weight":3},{"id":"r6","from":"Sul","to":"Cliente B","weight":4},{"id":"r7","from":"Leste","to":"Cliente B","weight":2}]
-}

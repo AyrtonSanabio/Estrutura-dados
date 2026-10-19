@@ -1,7 +1,0 @@
-{
-  "version": 1,
-  "kind": "graph",
-  "directed": true,
-  "vertices": [{"id":"App"},{"id":"Interface"},{"id":"Serviço"},{"id":"Dados"},{"id":"Autenticação"},{"id":"Config"}],
-  "edges": [{"id":"d1","from":"App","to":"Interface"},{"id":"d2","from":"App","to":"Serviço"},{"id":"d3","from":"Serviço","to":"Dados"},{"id":"d4","from":"Serviço","to":"Autenticação"},{"id":"d5","from":"Dados","to":"Config"},{"id":"d6","from":"Autenticação","to":"Config"}]
-}
