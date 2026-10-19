@@ -1,58 +1,32 @@
 /*
-Nome:
-Matricula:
-Data:
+Nome: Ayrton Sanabio
+Matricula: 0117925
+Data: 19/10/2026
 */
-
 #ifndef ARVORE_H
 #define ARVORE_H
 
-/*
- * TAD de arvore binaria de busca (ABB).
- * A estrutura interna e os nos devem ser definidos em arvore.c.
- */
+/* ABB de inteiros distintos, sem balanceamento automatico. */
 typedef struct arvore *Arvore;
 
-/* TODO: alocar e retornar uma arvore inicialmente vazia. */
 Arvore Acria(void);
-
-/* TODO: liberar todos os nos e, ao final, a estrutura da arvore.. */
 void Adestroi(Arvore arvore);
-
-/* TODO: retornar 1 se a arvore nao possuir nos; 0 caso contrario. */
+/* NULL e tratado como vazio nas consultas de tamanho/vazio. */
 int Avazia(Arvore arvore);
-
-/* TODO: retornar 1 se nao for possivel alocar um novo no; 0 caso contrario. */
+/* Sonda a alocacao de um no; nao garante alocacoes futuras. */
 int Acheia(Arvore arvore);
-
-/* TODO: inserir elemento respeitando a propriedade de arvore binaria de busca. */
+/* Retorna 1 se inseriu; 0 para repetido, arvore nula ou falta de memoria. */
 int Ainsere(Arvore arvore, int elemento);
-
-/* TODO: localizar elemento e retorna-lo por meio de valor. Retorna 1 se encontrou. */
+/* Consultas retornam 1 em sucesso e preenchem valor; 0 preserva a saida. */
 int Abusca(Arvore arvore, int elemento, int *valor);
-
-/* TODO: remover elemento da arvore. Retorna 1 se removeu; 0 se nao encontrou. */
 int Aremove(Arvore arvore, int elemento);
-
-/* TODO: retornar a quantidade de nos da arvore. */
 int Atamanho(Arvore arvore);
-
-/* TODO: retornar a altura da arvore vazia ou nao vazia conforme convencao escolhida. */
+/* Altura em arestas: vazia = -1, folha = 0; -2 indica falta de memoria. */
 int Aaltura(Arvore arvore);
-
-/* TODO: obter o menor elemento; retorna 1 em caso de sucesso. */
 int Amenor(Arvore arvore, int *valor);
-
-/* TODO: obter o maior elemento; retorna 1 em caso de sucesso. */
 int Amaior(Arvore arvore, int *valor);
-
-/* TODO: visitar/imprimir os nos na ordem raiz, esquerda, direita. */
+/* Percursos imprimem inteiros separados por espaco e uma quebra de linha. */
 void ApreOrdem(Arvore arvore);
-
-/* TODO: visitar/imprimir os nos na ordem esquerda, raiz, direita. */
 void AemOrdem(Arvore arvore);
-
-/* TODO: visitar/imprimir os nos na ordem esquerda, direita, raiz. */
 void AposOrdem(Arvore arvore);
-
 #endif

@@ -10,6 +10,8 @@ try {
         @("02-filas/fila.c", "02-filas/main.c", "-o", "output/fila.exe"),
         @("03-listas/lista.c", "03-listas/main.c", "-o", "output/lista.exe"),
         @("04-grafos/grafo.c", "04-grafos/caminho.c", "04-grafos/algoritmos.c", "04-grafos/main.c", "-o", "output/grafos.exe"),
+        @("05-arvores/arvore.c", "05-arvores/main.c", "-o", "output/arvores.exe"),
+        @("05-arvores/arvore.c", "testes/test_arvore.c", "-o", "output/testes/test_arvore.exe"),
         @("testes/test_tads.c", "01-pilhas/pilha.c", "02-filas/fila.c", "03-listas/lista.c", "04-grafos/grafo.c", "-o", "output/testes/test_tads.exe")
     )) {
         & $Compilador @opcoes @modulo
