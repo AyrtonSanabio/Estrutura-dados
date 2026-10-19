@@ -1,7 +1,7 @@
 /*
-Nome:
-Matricula:
-Data:
+Nome: Ayrton Sanabio
+Matricula: 0117925
+Data: 19/10/2026
 */
 
 #ifndef GRAFO_H
@@ -12,9 +12,14 @@ typedef struct grafo *Grafo;
 
 /* Operacoes de criacao e destruicao. */
 Grafo GGcriaGrafo(int max_vertices, int max_arestas);
-void GGdestroiGrafo(Grafo grafo);
+/* Libera a memoria e retorna NULL: use g = GGdestroiGrafo(g). */
+Grafo GGdestroiGrafo(Grafo grafo);
 int GVcriaVertice(Grafo grafo);
 int GAcriaAresta(Grafo grafo, int partida, int chegada);
+
+/* IDs removidos nao sao reutilizados. Os demais IDs permanecem estaveis. */
+int removeVertice(Grafo grafo, int vertice);
+int removeAresta(Grafo grafo, int aresta);
 
 /* Consultas de existencia e identificacao de arestas. */
 int GBexisteIdVertice(Grafo grafo, int vertice);
