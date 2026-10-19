@@ -1,7 +1,7 @@
 /*
-Nome:
-Matricula:
-Data:
+Nome: Ayrton Sanabio
+Matricula: 0117925
+Data: 19/10/2026
 */
 
 #include <stdio.h>
