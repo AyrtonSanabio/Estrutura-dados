@@ -1,7 +1,7 @@
 /*
-Nome: Ayrton Sanabio
-Matricula: 0117925
-Data: 19/10/2026
+Nome:
+Matricula:
+Data:
 */
 
 #ifndef LISTA_H
