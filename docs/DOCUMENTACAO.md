@@ -16,7 +16,8 @@ O TP 2 exige AGM, busca em largura, busca em profundidade, caminho mais curto e
 componentes conexos. Entrada e saída são textuais e há leitura de grafo por arquivo.
 Os algoritmos consultam somente a interface da TAD, sem acessar struct grafo.
 
-05-arvores não é requisito dos enunciados lidos e permanece como esqueleto de ABB.
+05-arvores não é requisito dos enunciados lidos, mas foi concluída a pedido como
+uma ABB de inteiros, com todas as 14 operações, menu e testes.
 Prim, ordenação topológica e componentes fortemente conexos pertencem ao conteúdo
 de estudo, mas não são funções adicionais implementadas nesta entrega. A AGM
 pedida é resolvida por Kruskal.
@@ -226,9 +227,49 @@ Também verifica se cada aresta do caminho corresponde aos vértices impressos.
 
 A execução em 19/10/2026 passou com GCC 6.3.0, C11 e todos os avisos tratados como
 erros. A suite não simula esgotamento de memória nem comprova todos os tamanhos
-possíveis. A pasta adicional de árvores não é compilada por não integrar os TPs.
+possíveis. O script também compila a ABB e executa seus testes: são 16 grupos Python
+ao todo, além dos programas de teste C das TADs e da árvore.
 
-## 8. Referências e elaboração
+## 8. Árvore binária de busca adicional
+
+O módulo 05-arvores/arvore.c armazena inteiros distintos em nós com filho esquerdo
+e direito, controlados pela raiz e pela quantidade total. Possui criação,
+destruição, consultas de vazio/cheio, inserção, busca, remoção, tamanho, altura,
+menor, maior e percursos pré-ordem, em ordem e pós-ordem.
+
+Inserção e busca seguem a comparação com o nó atual. Remoção trata folha, um filho
+e dois filhos. Neste último caso, copia o sucessor (menor da subárvore direita) e
+retira o nó sucessor, preservando o eventual filho direito dele.
+
+Não há balanceamento. Buscar, inserir, remover e encontrar extremos custam O(h),
+com h a altura; em árvore degenerada, o pior caso é O(n). Tamanho é O(1).
+A altura mede arestas: vazia = -1 e folha = 0; retorno -2 indica falta de memória
+para a pilha auxiliar. Altura e percursos custam O(n) em tempo e reservam O(n) de
+espaço auxiliar, usando quadros em vetor. A destruição é iterativa e usa rotações
+locais, com O(n) em tempo e O(1) em espaço auxiliar, sem precisar alocar memória.
+
+Inserção retorna 1 em sucesso e 0 para repetido, árvore nula ou falta de memória.
+Busca/menor/maior retornam 1 e escrevem a saída em sucesso; retornam 0 sem alterar
+a saída em falha. Remoção retorna 1 se encontrou e retirou o valor. A árvore nula é
+considerada vazia e de tamanho zero; destruição nula é segura. As consultas de cheio
+sondam alocação, como nas TADs básicas, sem garantir uma inserção futura.
+
+Os percursos imprimem inteiros separados por espaço e uma quebra de linha; vazio
+produz apenas a quebra de linha. Falha de alocação informa erro em stderr.
+O menu aceita inserir, buscar, remover e consultar todas as operações.
+Com argumentos inteiros, o programa imprime uma demonstração e encerra.
+
+~~~powershell
+.\output\arvores.exe
+.\output\arvores.exe 8 3 10 1 6 14 4 7 13
+~~~
+
+Há testes C de 1.500 estados aleatórios, remoções de todos os tipos, extremos de
+int, reinserção após vazio e árvore em cadeia de 3.000 nós. Os seis grupos Python
+adicionais verificam percursos exatos, altura, entradas inválidas, menu e 120
+estados do percurso em ordem contra um conjunto independente.
+
+## 9. Referências e elaboração
 
 - Walace de Almeida Rodrigues. TP - TADs basicas.pdf. Enunciado da disciplina.
 - Walace de Almeida Rodrigues. TP - TAD Grafo estatico.pdf. Especificação, pp. 3-10.

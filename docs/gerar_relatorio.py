@@ -91,6 +91,7 @@ tabela([
     ("04-grafos/grafo", "Vetores fixos de vértices e arestas, estrelas e persistência."),
     ("04-grafos/caminho", "Dijkstra compartilhado e formato de saída do TP 1."),
     ("04-grafos/algoritmos", "Percursos, componentes, Kruskal e saídas do TP 2."),
+    ("05-arvores (adicional)", "ABB completa, remoções, altura e três percursos."),
 ], [52 * mm, 118 * mm])
 p("O grafo reserva vetores de vértices e arestas na criação. Cada elemento tem ID "
   "e marca de atividade. Uma aresta armazena alfa, ômega e elos inteiros para as "
@@ -142,7 +143,7 @@ p("A TAD ocupa O(Cv + Ce). Percursos e Dijkstra usam O(Cv) auxiliar; Kruskal usa
 
 story.append(PageBreak())
 h("5. Validação")
-p("Os quatro programas foram compilados com GCC 6.3.0, C11 e as opções -Wall, "
+p("Os cinco programas foram compilados com GCC 6.3.0, C11 e as opções -Wall, "
   "-Wextra, -Wpedantic e -Werror. A execução em 19/10/2026 terminou sem avisos "
   "de compilação e com os testes aprovados.")
 tabela([
@@ -150,9 +151,10 @@ tabela([
     ("TADs básicas", "Ordem LIFO/FIFO, consulta, tamanho, extremos, remoção até vazio e reinserção."),
     ("TAD de grafo", "31 operações, capacidades, IDs, estrelas, laços, paralelas, arquivos e remoções."),
     ("540 estados de remoção", "Graus e estrelas comparados com um modelo independente em C."),
-    ("10 grupos de regressão", "Saídas exatas, formatos, erros, direção, desconexão e casos degenerados."),
+    ("16 grupos de regressão", "Saídas, formatos, menu, direção, desconexão, percursos e erros."),
     ("25 grafos aleatórios", "BFS/DFS de referência; Bellman-Ford para distâncias; enumeração para AGM."),
     ("DFS com 4.000 vértices", "Cadeia completa sem recursão na implementação."),
+    ("ABB adicional", "1.500 estados aleatórios, 120 estados de menu e cadeia de 3.000 nós."),
 ], [58 * mm, 112 * mm])
 p("Foram incluídos grafo vazio, vértice isolado, origem igual ao destino, laços, "
   "arestas paralelas, pesos zero, pesos negativos, arquivo truncado, conteúdo extra, "
@@ -198,7 +200,11 @@ p("A separação entre TAD, algoritmos e entrada/saída permite testar contratos
 p("Código e documentação foram concluídos com assistência de IA. Este texto "
   "relata decisões e validações técnicas; a avaliação pessoal da experiência e "
   "a preparação para a apresentação oral devem ser feitas pelo aluno. A pasta "
-  "adicional 05-arvores continua como esqueleto de estudo fora dos TPs.")
+  "adicional 05-arvores foi concluída a pedido, com as 14 operações da ABB. "
+  "A altura mede arestas: vazia = -1 e folha = 0. Busca, inserção e remoção custam "
+  "O(h); altura e percursos iterativos custam O(n) em tempo e espaço auxiliar. "
+  "Não há balanceamento automático. Os módulos originais de pilha, fila e lista "
+  "permanecem preservados.")
 h("8. Referências")
 p("RODRIGUES, Walace de Almeida. <i>TP - TADs basicas.pdf</i>; "
   "<i>TP - TAD Grafo estatico.pdf</i>, especialmente pp. 3-10; "

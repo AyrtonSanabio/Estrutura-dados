@@ -11,7 +11,7 @@ grafo estático e algoritmos em grafos. Os programas usam C11 e a biblioteca pad
 | 02-filas | Fila encadeada, FIFO e demonstração | Implementado e testado |
 | 03-listas | Lista dinâmica duplamente encadeada | Implementado e testado |
 | 04-grafos | 31 operações, remoções, caminho TP 1 e cinco algoritmos TP 2 | Implementado e testado |
-| 05-arvores | Esqueleto adicional de ABB | Fora dos TPs; preservado para estudo |
+| 05-arvores | ABB com 14 operações, menu e percursos | Implementado e testado; estudo adicional |
 | docs | Manual técnico e relatório em PDF | Documentado |
 | testes | Testes C e regressões Python | Aprovados |
 
@@ -35,6 +35,8 @@ Os executáveis ficam em output, ignorado pelo Git. A compilação usa
 .\output\pilha.exe
 .\output\fila.exe
 .\output\lista.exe
+.\output\arvores.exe
+.\output\arvores.exe 8 3 10 1 6 14 4 7 13
 .\output\grafos.exe exemplos/grafo.txt bfs 1
 .\output\grafos.exe exemplos/grafo.txt dfs 1
 .\output\grafos.exe exemplos/grafo.txt componentes
@@ -45,6 +47,10 @@ Os executáveis ficam em output, ignorado pelo Git. A compilação usa
 
 Acrescente --nao-dirigido a BFS, DFS ou caminho para consultar conexões nos dois
 sentidos. A operação tp1 é dirigida, conforme o PDF.
+
+Sem argumentos, arvores.exe abre o menu. Com inteiros, constrói a ABB e imprime
+tamanho, altura, extremos e os três percursos. Valores repetidos são recusados.
+Veja [as convenções da ABB](05-arvores/README.md).
 
 Sem PowerShell, compile o programa de grafos com:
 
